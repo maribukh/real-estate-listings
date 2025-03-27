@@ -9,7 +9,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="functional-container">
@@ -22,6 +25,20 @@
           oninput="search(this.value)"
           type="search"
           placeholder="search"
+        />
+      </div>
+      <div class="filter-container">
+        <input
+          type="number"
+          id="minPrice"
+          placeholder="Min Price"
+          oninput="filterByPrice()"
+        />
+        <input
+          type="number"
+          id="maxPrice"
+          placeholder="Max Price"
+          oninput="filterByPrice()"
         />
       </div>
     </div>

@@ -3,72 +3,71 @@ let useUsd = true;
 function renderProducts(a) {
   document.getElementById("products").innerHTML = "";
 
-  for (let i = 0; i < a.length; i++) {
-    const price = useUsd ? a[i].priceUsd : a[i].priceGel;
-    const currencySymbol = useUsd ? "$" : "₾";
-
+  for (let i = 0; i < products.length; i++) {
     document.getElementById("products").innerHTML += `
     <div class="card">
-      <div class="top relative">
-        <img class="productImg" src="${a[i].img}" alt="" />
-        <div class="icons-container">
-          <div class="left-side">
-            <img src="./asset/icon/rocket.svg" alt="" />
-            <p>S-VIP</p>
-          </div>
-          <div class="right-side">
-            <span onclick="deletCard(this)" class="material-symbols-outlined">
-              close
-            </span>
-          </div>
-        </div>
+  <div class="top relative">
+    <img class="productImg" src="${a[i].img}" alt="" />
+    <div class="icons-container">
+      <div class="left-side">
+        <img src="./asset/icon/rocket.svg" alt="" />
+        <p>S-VIP</p>
       </div>
-      <div class="bottom-container">
-        <div class="price-container">
-          <h3>
-            ${price} <span>${currencySymbol}</span>
-          </h3>
-          <div class="currency">
-            <button class="GEO">₾</button>
-            <button class="USD">$</button>
-          </div>
-        </div>
-        <p class="description">${a[i].description}</p>
-        <div class="location">
-          <img src="./asset/icon/location.png" alt="" />
-          <p>${a[i].location}</p>
-        </div>
-        <ul>
-          <li id="step">
-            <img src="./asset/icon/state.png" alt="" />
-            <span id="steps">${a[i].step}</span>
-          </li>
-          <li id="room">
-            <span class="material-symbols-outlined">door_front</span>
-            ${a[i].room}
-          </li>
-          <li id="bed">
-            <span class="material-symbols-outlined">king_bed</span>
-            ${a[i].bed}
-          </li>
-          <li id="area">
-            <span class="material-symbols-outlined">fullscreen</span>
-            <p>${a[i].area}/მ</p>
-            <sup>2</sup>
-          </li>
-        </ul>
-        <div class="bottom">
-          <div class="place">${a[i].place}</div>
-          <div class="time">
-            <img src="./asset/icon/time.png" alt="" />
-            <span>${a[i].time}</span>
-          </div>
-        </div>
+      <div class="right-side">
+        <span onclick="deletCard(this)" class="material-symbols-outlined">
+          close
+        </span>
       </div>
     </div>
+  </div>
+  <div class="bottom-container">
+    <div class="price-container">
+      <h3>
+        ${a[i].priceUsd}<span>${a[i].currency}</span>
+      </h3>
+      <div class="currency">
+        <button class="GEO">₾</button>
+        <button class="USD">$</button>
+      </div>
+    </div>
+    <p class="description">${a[i].description}</p>
+    <div class="location">
+      <img src="./asset/icon/location.png" alt="" />
+      <p>${a[i].location}</p>
+    </div>
+    <ul>
+      <li id="step">
+        <img src="./asset/icon/state.png" alt="" />
+        <span id="steps">${a[i].step}</span>
+      </li>
+      <li id="room">
+        <span class="material-symbols-outlined">door_front</span>
+        ${a[i].room}
+      </li>
+      <li id="bed">
+        <span class="material-symbols-outlined">king_bed</span>
+        ${a[i].bed}
+      </li>
+      <li id="area">
+        <span class="material-symbols-outlined">fullscreen</span>
+        <p>${a[i].area}/მ</p>
+        <sup>2</sup>
+      </li>
+    </ul>
+    <div class="bottom">
+      <div class="place">${a[i].place}</div>
+      <div class="time">
+        <img src="./asset/icon/time.png" alt="" />
+        <span>${a[i].time}</span>
+      </div>
+    </div>
+  </div>
+</div>
     `;
   }
 }
+
+
 
 function inc() {
   let sortPricing;
@@ -117,25 +116,26 @@ function deletCard(element) {
 // change currency
 
 function usdToGel(element) {
-  useUsd = false;
   let card = element.closest(".card");
   let index = Array.from(document.querySelectorAll(".card")).indexOf(card);
 
   card.querySelector(
     "h3"
   ).innerHTML = `${products[index].priceGel} <span>₾</span>`;
-  renderProducts(products);
+
+  useUsd = false;
 }
 
 function GelToUsd(element) {
-  useUsd = true;
   let card = element.closest(".card");
   let index = Array.from(document.querySelectorAll(".card")).indexOf(card);
 
   card.querySelector(
     "h3"
   ).innerHTML = `${products[index].priceUsd} <span>$</span>`;
-  renderProducts(products);
+
+
+  useUsd = true;
 }
 
 let products = [

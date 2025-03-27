@@ -26,6 +26,13 @@ li {
   gap: 0.256rem;
   font-size: 0.75rem;
   line-height: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+li:hover {
+  background-color: rgb(224, 222, 222);
+
 }
 
 .card-container {
