@@ -20,26 +20,32 @@
         <button type="button" onclick="inc()">ზრდადობით დალაგება</button>
         <button type="button" onclick="dec()">კლებადობით დალაგება</button>
       </div>
-      <div class="search-container">
-        <input
-          oninput="search(this.value)"
-          type="search"
-          placeholder="search"
-        />
-      </div>
       <div class="filter-container">
         <input
           type="number"
           id="minPrice"
           placeholder="Min Price"
-          oninput="filterByPrice()"
+          oninput="fillter()"
         />
         <input
           type="number"
           id="maxPrice"
           placeholder="Max Price"
-          oninput="filterByPrice()"
+          oninput="fillter()"
         />
+      </div>
+      <div class="search-container">
+        <input
+          oninput="search(this.value)"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
+      <div class="select-container">
+        <select name="" id="changeCurrently">
+          <option id="changeAllToGel" value="">₾</option>
+          <option id="changeAllToUsd" value="">$</option>
+        </select>
       </div>
     </div>
 

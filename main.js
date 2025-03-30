@@ -23,7 +23,7 @@ function renderProducts(a) {
   <div class="bottom-container">
     <div class="price-container">
       <h3>
-        ${a[i].priceUsd}<span>${a[i].currency}</span>
+        ${a[i].priceGel}<span>${a[i].currency}</span>
       </h3>
       <div class="currency">
         <button class="GEO">₾</button>
@@ -67,8 +67,6 @@ function renderProducts(a) {
   }
 }
 
-
-
 function inc() {
   let sortPricing;
   if (useUsd) {
@@ -81,6 +79,7 @@ function inc() {
     );
   }
   renderProducts(sortPricing);
+  init();
 }
 
 function dec() {
@@ -95,6 +94,54 @@ function dec() {
     );
   }
   renderProducts(sortPricing);
+  init();
+}
+// fillter products
+
+function fillter() {
+  let mn = parseInt(document.querySelector("#minPrice").value);
+  let mx = parseInt(document.querySelector("#maxPrice").value);
+  let search = document.querySelector("input[type='search']").value;
+
+  let filtered_products;
+
+  if (useUsd) {
+    if (search && mn && mx) {
+      filtered_products = products.filter(
+        (x) =>
+          x.numberOfPriceUsd >= mn &&
+          x.numberOfPriceUsd <= mx &&
+          x.description.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+    } else if (mn && mx) {
+      filtered_products = products.filter(
+        (x) => x.numberOfPriceUsd >= mn && x.numberOfPriceUsd <= mx
+      );
+    } else if (search) {
+      filtered_products = products.filter((x) =>
+        x.description.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+    }
+  } else {
+    if (search && mn && mx) {
+      filtered_products = products.filter(
+        (x) =>
+          x.numberOfPriceGel >= mn &&
+          x.numberOfPriceGel <= mx &&
+          x.description.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+    } else if (mn && mx) {
+      filtered_products = products.filter(
+        (x) => x.numberOfPriceGel >= mn && x.numberOfPriceGel <= mx
+      );
+    } else if (search) {
+      filtered_products = products.filter((x) =>
+        x.description.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+    }
+  }
+
+  renderProducts(filtered_products);
 }
 
 // search function
@@ -110,7 +157,16 @@ function search(value) {
 // delete function
 
 function deletCard(element) {
-  element.parentElement.parentElement.parentElement.parentElement.remove();
+  let card = element.parentElement.parentElement.parentElement.parentElement;
+  let img = card.querySelector("img").src;
+  let description = card.querySelector(".description").innerText;
+  let time = card.querySelector(".time").innerText;
+  let product = products.filter(
+    (x) => x.img == img && x.description == description && x.time == time
+  );
+
+  products.pop(product);
+  card.remove();
 }
 
 // change currency
@@ -134,9 +190,54 @@ function GelToUsd(element) {
     "h3"
   ).innerHTML = `${products[index].priceUsd} <span>$</span>`;
 
-
   useUsd = true;
 }
+
+function init() {
+  let text = document.querySelectorAll(".GEO");
+  let text2 = document.querySelectorAll(".USD");
+
+  text.forEach((element) => {
+    element.addEventListener("click", function () {
+      usdToGel(element);
+    });
+  });
+
+  text2.forEach((element) => {
+    element.addEventListener("click", function () {
+      GelToUsd(element);
+    });
+  });
+
+  let buttons = document.querySelectorAll(".currency button");
+
+  let gelButtons = document.querySelectorAll(".GEO");
+
+  gelButtons.forEach(function (gelButtons) {
+    gelButtons.classList.add("active-button");
+  });
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      let card = this.closest(".card");
+
+      let cardButtons = card.querySelectorAll(".currency button");
+      cardButtons.forEach(function (cardButton) {
+        cardButton.classList.remove("active-button");
+      });
+
+      this.classList.add("active-button");
+    });
+  });
+}
+
+document.getElementById("changeCurrently").addEventListener("change", function() {
+
+  useUsd = this.value === "$";
+  
+  renderProducts(products); 
+});
+
 
 let products = [
   {
@@ -145,7 +246,7 @@ let products = [
     priceGel: "71,500",
     numberOfPriceUsd: 26000,
     numberOfPriceGel: 226000,
-    currency: "$",
+    currency: "₾",
     description:
       "იყიდება სასოფლო-სამეურნეო მიწის ნაკვეთი მცხეთის მუნიციპალიტეტში",
     location: "მისაქციელის ქუჩა",
@@ -163,7 +264,7 @@ let products = [
     priceGel: "118.25",
     numberOfPriceUsd: 43,
     numberOfPriceGel: 118.25,
-    currency: "$",
+    currency: "₾",
     description: "ქირავდება დღიურად 2 ოთახიანი ბინა საბურთალოზე",
     location: "თამარაშვილის 6",
     step: "9/16",
@@ -180,7 +281,7 @@ let products = [
     priceGel: "276,300",
     numberOfPriceUsd: 98900,
     numberOfPriceGel: 276300,
-    currency: "$",
+    currency: "₾",
     description: "იყიდება 3 ოთახიანი ბინა დიდ დიღომში",
     location: "დემეტრე თავდადებულის ქუჩა 40",
     step: "9/15",
@@ -197,7 +298,7 @@ let products = [
     priceGel: "600",
     numberOfPriceUsd: 216,
     numberOfPriceGel: 600,
-    currency: "$",
+    currency: "₾",
     description: "ქირავდება დღიურად 7 ოთახიანი კერძო სახლი დიდ დიღომში",
     location: "დემეტრე თავდადებულის ქუჩა 40",
     step: "3",
@@ -214,7 +315,7 @@ let products = [
     priceGel: "50",
     numberOfPriceUsd: 18,
     numberOfPriceGel: 50,
-    currency: "$",
+    currency: "₾",
     description: "ქირავდება დღიურად 2 ოთახიანი ბინა საბურთალოზე",
     location: "დემეტრე თავდადებულის ქუჩა 40",
     step: "7",
@@ -231,7 +332,7 @@ let products = [
     priceGel: "100",
     numberOfPriceUsd: 36,
     numberOfPriceGel: 100,
-    currency: "$",
+    currency: "₾",
     description: "ქირავდება დღიურად 2 ოთახიანი ბინა საბურთალოზე",
     location: "დემეტრე თავდადებულის ქუჩა 40",
     step: "4",
@@ -248,7 +349,7 @@ let products = [
     priceGel: "3,000",
     numberOfPriceUsd: 1100,
     numberOfPriceGel: 3000,
-    currency: "$",
+    currency: "₾",
     description: "ქირავდება დღიურად 7 ოთახიანი კერძო სახლი დიდ დიღომში",
     location: "დემეტრე თავდადებულის ქუჩა 40",
     step: "8",
@@ -265,7 +366,7 @@ let products = [
     priceGel: "71,500",
     numberOfPriceUsd: 26000,
     numberOfPriceGel: 226000,
-    currency: "$",
+    currency: "₾",
     description:
       "იყიდება სასოფლო-სამეურნეო მიწის ნაკვეთი მცხეთის მუნიციპალიტეტში",
     location: " N/A",
@@ -277,44 +378,58 @@ let products = [
     place: "მისაქციელი",
     time: "25 მარ 15:06",
   },
+  {
+    img: "https://api-statements.tnet.ge/uploads/202410/20241028/statements/N9SBmIZ671f799dc3106.webp",
+    priceUsd: "11",
+    priceGel: "30,25",
+    numberOfPriceUsd: 11,
+    numberOfPriceGel: 30.25,
+    currency: "₾",
+    description: "ქირავდება დღიურად 1 ოთახიანი ბინა ისანში",
+    location: "ლეხ კაჩინსკის ქ. 1",
+    step: "10",
+    room: 1,
+    bed: 1,
+    area: "30",
+    areaNumber: 30,
+    place: "ისანი",
+    time: "27 მარ 15:08",
+  },
+  {
+    img: "https://api-statements.tnet.ge/uploads/202503/20250318/statements/RCbXpnU67d96ee51efa3.webp",
+    priceUsd: "650",
+    priceGel: "1,787",
+    numberOfPriceUsd: 650,
+    numberOfPriceGel: 1787,
+    currency: "₾",
+    description: "ქირავდება დღიურად 1 ოთახიანი ბინა ისანში",
+    location: "შ. ნუცუბიძის ქ.",
+    step: "4/15",
+    room: 2,
+    bed: 1,
+    area: "65",
+    areaNumber: 65,
+    place: "საბურთალო",
+    time: "27 მარ 15:08",
+  },
+  {
+    img: "https://static.my.ge/myhome/photos/7/4/1/0/8/large/11180147_2.jpg",
+    priceUsd: "14",
+    priceGel: "38,5",
+    numberOfPriceUsd: 14,
+    numberOfPriceGel: 38.5,
+    currency: "₾",
+    description: "ქირავდება დღიურად 1 ოთახიანი ბინა ბათუმში",
+    location: "ხიმშიაშვილის 7ბ",
+    step: "34/50",
+    room: 2,
+    bed: 1,
+    area: "33",
+    areaNumber: 33,
+    place: "ხიმშიაშვილის უბანი",
+    time: "27 მარ 11:08",
+  },
 ];
 
 renderProducts(products);
-
-let text = document.querySelectorAll(".GEO");
-let text2 = document.querySelectorAll(".USD"); 
-let changeCurrency = false;
-let firstCurrency = "";
-
-text.forEach((element) => {
-  element.addEventListener("click", function () {
-    usdToGel(element);
-  });
-});
-
-text2.forEach((element) => {
-  element.addEventListener("click", function () {
-    GelToUsd(element);
-  });
-});
-
-// change color on buttons
-let buttons = document.querySelectorAll("button");
-
-let usdButtons = document.querySelectorAll(".USD");
-usdButtons.forEach(function (usdButton) {
-  usdButton.classList.add("active-button");
-});
-
-buttons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    let card = this.closest(".card");
-
-    let cardButtons = card.querySelectorAll("button");
-    cardButtons.forEach(function (cardButton) {
-      cardButton.classList.remove("active-button");
-    });
-
-    this.classList.add("active-button");
-  });
-});
+init();
