@@ -28,7 +28,7 @@ Data Handling: JavaScript Array of Objects
 
 Clone the repository:
 
-git clone https://github.com/your-username/real-estate-listings.git
+git clone https://github.com/maribukh/real-estate-listings.git
 
 Navigate to the project folder:
 
