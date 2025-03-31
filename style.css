@@ -142,9 +142,9 @@ h3 span {
   line-height: 1.75rem;
 }
 
-.button_container,
-.filter-container {
-  width: 50%;
+
+.button_container {
+  width: 100%;
 }
 
 .button_container button {
@@ -258,9 +258,15 @@ ul .material-symbols-outlined {
 .functional-container {
   width: 65.95%;
   margin: 2rem auto;
+  gap: 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.button_container {
+  display: flex;
 }
 
 .button_container button {
@@ -276,7 +282,7 @@ ul .material-symbols-outlined {
 }
 
 .search-container {
-  width: 26.5%;
+  width: 56%;
   display: flex;
   align-items: center;
   height: 100%;
@@ -312,9 +318,6 @@ ul .material-symbols-outlined {
 .filter-container {
   display: flex;
   gap: 1rem;
-  align-items: center;
-  margin: 2rem auto;
-  justify-content: flex-end;
 }
 
 .filter-container input {
@@ -322,7 +325,7 @@ ul .material-symbols-outlined {
   border-radius: 0.5rem;
   border: 1px solid #ccc;
   font-size: 1rem;
-  width: 15rem;
+  width: fit-content;
   transition: border-color 0.3s ease;
 }
 
@@ -337,17 +340,16 @@ ul .material-symbols-outlined {
 
 select {
   border: none;
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(38, 181, 113);
   outline: none;
+  color: white;
 }
 
 .select-container {
   flex-wrap: wrap;
-  margin: 2rem;
   display: flex;
-  gap: 1rem;
-  background-color: rgb(247, 247, 247);
-  padding: 1rem;
+  background-color: rgb(38, 181, 113);
+  padding: 0.5rem;
   border-radius: 1rem;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }
