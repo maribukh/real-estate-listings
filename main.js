@@ -67,6 +67,30 @@ function renderProducts(a) {
   }
 }
 
+function changeCurrency(currency) {
+  useUsd = currency === "$"; 
+
+  products.forEach((product, index) => {
+    let card = document.querySelectorAll(".card")[index];
+
+    if (card) {
+      let priceElement = card.querySelector("h3");
+      let gelButton = card.querySelector(".GEO");
+      let usdButton = card.querySelector(".USD");
+
+      if (useUsd) {
+        priceElement.innerHTML = `${product.priceUsd} <span>$</span>`;
+        usdButton.classList.add("active-button");
+        gelButton.classList.remove("active-button");
+      } else {
+        priceElement.innerHTML = `${product.priceGel} <span>₾</span>`;
+        gelButton.classList.add("active-button");
+        usdButton.classList.remove("active-button");
+      }
+    }
+  });
+}
+
 function inc() {
   let sortPricing;
   if (useUsd) {
@@ -190,6 +214,10 @@ function GelToUsd(element) {
     "h3"
   ).innerHTML = `${products[index].priceUsd} <span>$</span>`;
 
+  card.querySelector(
+    "option #numberOfPriceUsd"
+  ).innerHTML = `${products[index].priceUsd} <span>$</span>`;
+
   useUsd = true;
 }
 
@@ -230,14 +258,6 @@ function init() {
     });
   });
 }
-
-document.getElementById("changeCurrently").addEventListener("change", function() {
-
-  useUsd = this.value === "$";
-  
-  renderProducts(products); 
-});
-
 
 let products = [
   {

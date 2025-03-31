@@ -141,10 +141,12 @@ h3 span {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+
 .button_container,
 .filter-container {
   width: 50%;
 }
+
 .button_container button {
   padding: 0.5rem;
 }
@@ -157,10 +159,12 @@ h3 span {
 }
 
 button {
-  padding: 0.25rem 0.75rem; /* Smaller padding for buttons */
+  padding: 0.25rem 0.75rem;
+  /* Smaller padding for buttons */
   border: 1px solid #38b173;
   border-radius: 25px;
-  font-size: 0.8rem; /* Smaller font size */
+  font-size: 0.8rem;
+  /* Smaller font size */
   font-weight: 600;
   color: #38b173;
   background-color: white;
@@ -329,4 +333,21 @@ ul .material-symbols-outlined {
 
 .filter-container input::placeholder {
   color: #888;
+}
+
+select {
+  border: none;
+  background-color: rgb(247, 247, 247);
+  outline: none;
+}
+
+.select-container {
+  flex-wrap: wrap;
+  margin: 2rem;
+  display: flex;
+  gap: 1rem;
+  background-color: rgb(247, 247, 247);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }

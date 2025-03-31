@@ -42,9 +42,13 @@
         />
       </div>
       <div class="select-container">
-        <select name="" id="changeCurrently">
-          <option id="changeAllToGel" value="">₾</option>
-          <option id="changeAllToUsd" value="">$</option>
+        <select
+          name=""
+          id="changeCurrently"
+          onchange="changeCurrency(this.value)"
+        >
+          <option value="₾">₾</option>
+          <option value="$">$</option>
         </select>
       </div>
     </div>
