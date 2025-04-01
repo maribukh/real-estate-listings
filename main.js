@@ -535,6 +535,42 @@ let products = [
     place: "სან. ზონა",
     time: "29 მარ 23:35",
   },
+
+  {
+    img: "https://api-statements.tnet.ge/uploads/202503/20250303/statements/jiL1nXQ67c523ccdec62.webp",
+    priceUsd: "70,875",
+    priceGel: "195,955",
+    numberOfPriceUsd: 70875,
+    numberOfPriceGel: 195955,
+    currency: "₾",
+    description: "იყიდება სასოფლო-სამეურნეო მიწის ნაკვეთი საგარეჯოში",
+    location: "პატარძეული",
+    step: "0",
+    room: 0,
+    bed: 0,
+    area: "10125",
+    areaNumber: 10125,
+    place: "პატარძეული",
+    time: "27 მარ 13:35",
+  },
+
+  {
+    img: " https://api-statements.tnet.ge/uploads/202501/20250111/statements/UyAmpQp6782a86b29bab.webp",
+    priceUsd: "550",
+    priceGel: "1,521",
+    numberOfPriceUsd: 550,
+    numberOfPriceGel: 1521,
+    currency: "₾",
+    description: "ქირავდება 2 ოთახიანი ბინა დიდუბეში",
+    location: "მირცხულავას ქუჩა 5",
+    step: "11/16",
+    room: 2,
+    bed: 1,
+    area: "70",
+    areaNumber: 70,
+    place: "დიდყბე",
+    time: "27 მარ 3:35",
+  },
 ];
 
 renderProducts(products);
